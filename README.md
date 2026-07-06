@@ -76,14 +76,23 @@ git remote add origin <repo-url>
 git push -u origin main
 ```
 
+
+Deploy no Vercel (passos rápidos)
+
+1. Crie um repositório no GitHub e faça push do código.
+2. Em https://vercel.com, clique em "New Project" → importe o repositório.
+3. O Vercel detecta static + serverless; os arquivos em `public/` serão servidos como estáticos e as funções em `api/` virarão Serverless Functions.
+4. Atenção importante: em plataformas serverless (Vercel) o sistema de arquivos é efêmero — gravações em `data/cards.json` NÃO persistirão entre invocações. Se você precisa de persistência, use um serviço externo (Supabase, Firebase, MongoDB Atlas, etc.) ou mantenha o back-end em um serviço com filesystem persistente (Render, Railway, DigitalOcean App Platform).
+5. Se aceitar as limitações, o deploy é automático após a importação; caso precise de persistência, atualize as funções em `api/` para usar um banco externo e defina as credenciais como Environment Variables no dashboard do Vercel.
+
 Quer que eu:
 
-- atualize o `package.json` com campos básicos (description/author/repository),
-- gere um arquivo `LICENSE` (MIT) e um `cards.example.json`,
-- atualize `data/cards.json` para conter exemplos, ou
-- inicialize um repositório Git e faça o commit inicial aqui?
+- gere um `LICENSE` (MIT) e um `cards.example.json`,
+- atualize o `package.json` com campos básicos e `repository`,
+- implementar integração rápida com Supabase (ex.: adicionar dependência + exemplo de uso nas funções), ou
+- apenas guie você passo-a-passo no console do Vercel?
 
-Se preferir, aplico qualquer combinação automaticamente.
+Diga qual opção prefere que eu execute automaticamente.
 
 ---
 
