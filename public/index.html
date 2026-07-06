@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="App de revisão: cartões de estudo simples e rápido">
+  <title>App de Revisão</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+  <div class="container">
+      <header class="site-header">
+          <img src="/favicon.svg" alt="Logo" class="logo">
+          <div>
+            <h1>Minha Revisão Inteligente</h1>
+            <div class="subtitle">Cartões de estudo rápidos — revise com foco</div>
+          </div>
+      </header>
+
+      <main>
+      <div class="card-container" id="card-container" tabindex="0" role="button" aria-pressed="false">
+          <div class="card" id="card">
+              <div class="card-face card-front">
+                  <p id="question-text">Carregando pergunta...</p>
+                  <small>Clique para ver a resposta</small>
+              </div>
+              <div class="card-face card-back">
+                  <p id="answer-text">Carregando resposta...</p>
+                  <small>Clique para voltar à pergunta</small>
+              </div>
+          </div>
+      </div>
+
+      <div class="controls">
+          <button id="prev-btn">Anterior</button>
+          <span id="progress">1 / 1</span>
+          <button id="next-btn">Próximo</button>
+      </div>
+
+      <div class="delete-section" style="margin-top: 15px;">
+          <button id="delete-btn" style="background-color: #ef4444; width: 100%;">Apagar Este Cartão</button>
+      </div>
+
+      <div class="quiz-section">
+          <button id="random-btn" class="btn-secondary">Sortear 10 Cartões</button>
+      </div>
+
+      <hr>
+
+      <div class="form-container">
+          <h3>Criar Novo Cartão</h3>
+          <form id="card-form" aria-label="Formulário para criar novo cartão">
+              <div class="form-group">
+                  <label for="new-question">Pergunta:</label>
+                  <input type="text" id="new-question" required placeholder="Ex: O que é uma API?">
+              </div>
+              <div class="form-group">
+                  <label for="new-answer">Resposta:</label>
+                  <textarea id="new-answer" required placeholder="Ex: É um conjunto de rotinas e padrões de programação..."></textarea>
+              </div>
+              <button type="submit" class="btn-success">Salvar Cartão</button>
+          </form>
+      </div>
+      </main>
+
+      <footer class="site-footer">Feito com ❤️ por Luiz Henrique — App de Revisão</footer>
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
