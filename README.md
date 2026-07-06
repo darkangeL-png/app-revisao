@@ -1,100 +1,255 @@
-# App de Revisão (Flashcards)
+# 📚 App de Revisão (Flashcards)
 
-Aplicação simples de flashcards para revisão de conteúdo. Esta versão foi organizada para servir uma interface estática em `public/` e um back-end minimalista em `src/server/` que lê/grava os cartões em `data/cards.json`.
+Uma aplicação simples de flashcards para revisão de conteúdos, desenvolvida com **Node.js** e **Express**. O projeto possui uma interface web estática e uma API REST responsável por gerenciar os cartões de estudo armazenados em um arquivo JSON.
 
-Principais recursos
-- Interface interativa para navegar entre cartões e ver respostas
-- Criar novos cartões via formulário (persistidos em `data/cards.json`)
-- Apagar cartões pelo back-end
-- Modo de sortear um conjunto de cartões (ex.: 10 cartões aleatórios)
+## ✨ Funcionalidades
 
-Estrutura do projeto
-
-- `public/` — arquivos do cliente (HTML, CSS, JS, favicon)
-- `public/js/app.js` — lógica do cliente (consome a API)
-- `public/css/style.css` — estilos e tema
-- `src/server/index.js` — servidor Express que expõe a API e serve os assets estáticos
-- `data/cards.json` — arquivo JSON com os cartões (atualmente vazio por padrão)
-- `package.json` — dependências e scripts
-- `.gitignore` — arquivos ignorados pelo Git
-
-Requisitos
-
-- Node.js 16+ recomendado
-- npm (ou yarn)
-
-Instalação e execução local
-
-```bash
-# instalar dependências
-npm install
-
-# rodar em produção simples
-npm start
-
-# rodar em modo de desenvolvimento (recarregamento com nodemon)
-npm run dev
-```
-
-A aplicação será servida em `http://localhost:3000`.
-
-API
-
-Todas as rotas partem de `/api/cards` e retornam/consomem JSON.
-
-- GET `/api/cards` — retorna a lista de cartões
-- POST `/api/cards` — adiciona um cartão; corpo JSON: `{ "question": "...", "answer": "..." }`
-- DELETE `/api/cards/:index` — remove o cartão no índice especificado (0-based)
-
-Notas sobre dados
-
-- O arquivo `data/cards.json` é o armazenamento simples do projeto. Se você pretende publicar o repositório público, considere:
-	- remover dados sensíveis (se houver) antes do commit,
-	- ou adicionar `data/` ao `.gitignore` e fornecer um `data/cards.example.json` com exemplos.
-
-Segurança e dependências
-
-- Fiz uma verificação rápida com `npm audit` — há entradas de alta severidade relacionadas a `nodemon` (devDependency). Isso não impacta o runtime, mas recomendo atualizar `nodemon` para a versão segura ou executar `npm audit fix` quando apropriado.
-
-Sugestões antes de publicar no Git
-
-1. Atualize o `package.json` com `description`, `author`, `repository` e `keywords`.
-2. Adicione um arquivo `LICENSE` (sugestão: MIT) se desejar publicar com uma licença permissiva.
-3. Decida se `data/cards.json` deve ser comitado ou mantido local (adicionar ao `.gitignore`).
-4. Remova ou confirme que não há segredos no projeto.
-5. (Opcional) Configure GitHub Actions para rodar `npm audit` e checks básicos.
-
-Commit inicial sugerido
-
-```bash
-git init
-git add .
-git commit -m "chore: estrutura inicial e melhorias de UI"
-git branch -M main
-# adicionar remote e push
-git remote add origin <repo-url>
-git push -u origin main
-```
-
-
-Deploy no Vercel (passos rápidos)
-
-1. Crie um repositório no GitHub e faça push do código.
-2. Em https://vercel.com, clique em "New Project" → importe o repositório.
-3. O Vercel detecta static + serverless; os arquivos em `public/` serão servidos como estáticos e as funções em `api/` virarão Serverless Functions.
-4. Atenção importante: em plataformas serverless (Vercel) o sistema de arquivos é efêmero — gravações em `data/cards.json` NÃO persistirão entre invocações. Se você precisa de persistência, use um serviço externo (Supabase, Firebase, MongoDB Atlas, etc.) ou mantenha o back-end em um serviço com filesystem persistente (Render, Railway, DigitalOcean App Platform).
-5. Se aceitar as limitações, o deploy é automático após a importação; caso precise de persistência, atualize as funções em `api/` para usar um banco externo e defina as credenciais como Environment Variables no dashboard do Vercel.
-
-Quer que eu:
-
-- gere um `LICENSE` (MIT) e um `cards.example.json`,
-- atualize o `package.json` com campos básicos e `repository`,
-- implementar integração rápida com Supabase (ex.: adicionar dependência + exemplo de uso nas funções), ou
-- apenas guie você passo-a-passo no console do Vercel?
-
-Diga qual opção prefere que eu execute automaticamente.
+- 📖 Navegação entre flashcards
+- 👀 Exibir ou ocultar a resposta do cartão
+- ➕ Criar novos flashcards
+- 🗑️ Excluir cartões existentes
+- 🎲 Sortear um conjunto aleatório de cartões para revisão
+- 💾 Persistência local utilizando `data/cards.json`
 
 ---
 
-Arquivo principal: [public/index.html](public/index.html)
+# 🏗️ Estrutura do Projeto
 
+```
+.
+├── data/
+│   └── cards.json          # Banco de dados local
+│
+├── public/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── app.js
+│   ├── index.html
+│   └── favicon.ico
+│
+├── src/
+│   └── server/
+│       └── index.js        # Servidor Express
+│
+├── package.json
+├── package-lock.json
+└── .gitignore
+```
+
+---
+
+# 🚀 Tecnologias
+
+- Node.js
+- Express
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
+
+---
+
+# 📋 Requisitos
+
+- Node.js **16** ou superior
+- npm (ou Yarn)
+
+---
+
+# ⚙️ Instalação
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
+```
+
+Entre na pasta do projeto:
+
+```bash
+cd SEU-REPOSITORIO
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+---
+
+# ▶️ Executando
+
+### Produção
+
+```bash
+npm start
+```
+
+### Desenvolvimento
+
+```bash
+npm run dev
+```
+
+A aplicação ficará disponível em:
+
+```
+http://localhost:3000
+```
+
+---
+
+# 📡 API
+
+Todas as rotas utilizam o prefixo:
+
+```
+/api/cards
+```
+
+## Listar cartões
+
+```http
+GET /api/cards
+```
+
+### Resposta
+
+```json
+[
+  {
+    "question": "O que é Node.js?",
+    "answer": "Um ambiente de execução JavaScript."
+  }
+]
+```
+
+---
+
+## Criar cartão
+
+```http
+POST /api/cards
+```
+
+### Body
+
+```json
+{
+  "question": "Pergunta",
+  "answer": "Resposta"
+}
+```
+
+---
+
+## Excluir cartão
+
+```http
+DELETE /api/cards/:index
+```
+
+Exemplo:
+
+```
+DELETE /api/cards/0
+```
+
+---
+
+# 💾 Armazenamento
+
+Os cartões são armazenados localmente em:
+
+```
+data/cards.json
+```
+
+Caso o projeto seja publicado como código aberto, recomenda-se:
+
+- remover dados pessoais antes do commit;
+- utilizar um arquivo `cards.example.json`;
+- adicionar `data/` ao `.gitignore`, caso os dados sejam privados.
+
+---
+
+# 🔒 Segurança
+
+Foi realizada uma verificação utilizando:
+
+```bash
+npm audit
+```
+
+Foi identificada uma vulnerabilidade de alta severidade relacionada ao **nodemon**, utilizado apenas durante o desenvolvimento.
+
+Ela não afeta a aplicação em produção, porém é recomendado executar:
+
+```bash
+npm audit fix
+```
+
+ou atualizar o `nodemon` para a versão mais recente.
+
+---
+
+# ☁️ Deploy no Vercel
+
+1. Envie o projeto para um repositório no GitHub.
+
+2. Acesse:
+
+```
+https://vercel.com
+```
+
+3. Clique em **New Project**.
+
+4. Importe o repositório.
+
+5. O Vercel fará automaticamente o deploy dos arquivos estáticos.
+
+## ⚠️ Importante
+
+O sistema de arquivos do Vercel é **efêmero**.
+
+Isso significa que alterações em:
+
+```
+data/cards.json
+```
+
+não serão persistidas após novas execuções da aplicação.
+
+Para persistência dos dados, utilize um banco de dados externo, como:
+
+- Supabase
+- Firebase
+- MongoDB Atlas
+- PostgreSQL
+- MySQL
+- Railway
+- Render
+
+---
+
+# 📌 Melhorias Futuras
+
+- Sistema de autenticação
+- Categorias de flashcards
+- Busca por cartões
+- Importação e exportação em JSON
+- Revisão por repetição espaçada (Spaced Repetition)
+- Modo escuro
+- Estatísticas de estudo
+- Edição de cartões
+- Favoritos
+
+---
+
+# 📄 Licença
+
+Este projeto está disponível sob a licença **MIT**.
+
+Sinta-se à vontade para estudar, modificar e contribuir.
